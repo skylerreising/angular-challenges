@@ -29,8 +29,9 @@ import { ListItemComponent } from '../list-item/list-item.component';
 
       <section>
         @for (item of list(); track item) {
+          <!-- to get things working, I checked to see if there is a firstName, and if not, use name for now -->
           <app-list-item
-            [name]="item.firstName"
+            [name]="item.firstName ? item.firstName : item.name"
             [id]="item.id"
             [type]="type()"></app-list-item>
         }
