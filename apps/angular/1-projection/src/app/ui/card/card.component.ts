@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { CityStore } from '../../data-access/city.store';
 import {
@@ -17,21 +16,12 @@ import { ListItemComponent } from '../list-item/list-item.component';
     <div
       class="flex w-fit flex-col gap-3 rounded-md border-2 border-black p-4"
       [class]="customClass()">
-      @if (type() === CardType.TEACHER) {
-        <img ngSrc="assets/img/teacher.png" width="200" height="200" />
-      }
-      @if (type() === CardType.STUDENT) {
-        <img ngSrc="assets/img/student.webp" width="200" height="200" />
-      }
-      @if (type() === CardType.CITY) {
-        <img ngSrc="assets/img/city.png" width="200" height="200" />
-      }
+      <ng-content select="img"></ng-content>
 
       <section>
         @for (item of list(); track item) {
-          <!-- to get things working, I checked to see if there is a firstName, and if not, use name for now -->
           <app-list-item
-            [name]="item.firstName ? item.firstName : item.name"
+            [name]="item.firstName ?? item.name"
             [id]="item.id"
             [type]="type()"></app-list-item>
         }
@@ -44,7 +34,22 @@ import { ListItemComponent } from '../list-item/list-item.component';
       </button>
     </div>
   `,
-  imports: [ListItemComponent, NgOptimizedImage],
+  styles: [
+    `
+      .blue {
+        background-color: lightblue;
+      }
+
+      .green {
+        background-color: rgba(0, 250, 0, 0.1);
+      }
+
+      .red {
+        background-color: rgba(250, 0, 0, 0.1);
+      }
+    `,
+  ],
+  imports: [ListItemComponent],
 })
 export class CardComponent {
   private teacherStore = inject(TeacherStore);
@@ -53,7 +58,7 @@ export class CardComponent {
 
   readonly list = input<any[] | null>(null);
   readonly type = input.required<CardType>();
-  readonly customClass = input('');
+  readonly customClass = input<'blue' | 'green' | 'red'>('blue');
 
   CardType = CardType;
 

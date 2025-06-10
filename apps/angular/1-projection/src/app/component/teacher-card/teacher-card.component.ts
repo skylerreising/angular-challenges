@@ -7,18 +7,10 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <app-card
-      [list]="teachers()"
-      [type]="cardType"
-      customClass="bg-light-red"></app-card>
+    <app-card [list]="teachers()" [type]="cardType" customClass="red">
+      <img src="assets/img/teacher.png" width="200" height="200" />
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-red {
-        background-color: rgba(250, 0, 0, 0.1);
-      }
-    `,
-  ],
   imports: [CardComponent],
 })
 export class TeacherCardComponent implements OnInit {

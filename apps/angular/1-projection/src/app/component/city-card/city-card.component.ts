@@ -12,15 +12,10 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-city-card',
   template: `
-    <app-card [list]="cities()" [type]="cardType" customClass="bg-light-blue" />
+    <app-card [list]="cities()" [type]="cardType" customClass="blue">
+      <img src="assets/img/city.png" width="200" height="200" />
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-blue {
-        background-color: lightblue;
-      }
-    `,
-  ],
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

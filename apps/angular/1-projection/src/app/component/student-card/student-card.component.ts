@@ -12,18 +12,10 @@ import { CardComponent } from '../../ui/card/card.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <app-card
-      [list]="students()"
-      [type]="cardType"
-      customClass="bg-light-green" />
+    <app-card [list]="students()" [type]="cardType" customClass="green">
+      <img src="assets/img/student.webp" width="200" height="200" />
+    </app-card>
   `,
-  styles: [
-    `
-      ::ng-deep .bg-light-green {
-        background-color: rgba(0, 250, 0, 0.1);
-      }
-    `,
-  ],
   imports: [CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
